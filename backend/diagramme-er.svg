@@ -1,0 +1,106 @@
+<svg viewBox="0 0 1100 720" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1B2A4A"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1100" height="720" fill="#FFFFFF"/>
+  <text x="550" y="36" text-anchor="middle" font-size="20" font-weight="bold" fill="#1B2A4A">Modèle de données — Bibliothèque de quartier</text>
+  <text x="550" y="58" text-anchor="middle" font-size="12" fill="#6B7280">Akieni Academy — Cohorte 2 — Projet S14-S15</text>
+
+  <!-- AUTEUR table -->
+  <g>
+    <rect x="60" y="110" width="230" height="150" rx="6" fill="#F4F6FA" stroke="#1B2A4A" stroke-width="1.5"/>
+    <rect x="60" y="110" width="230" height="34" rx="6" fill="#1B2A4A"/>
+    <rect x="60" y="128" width="230" height="16" fill="#1B2A4A"/>
+    <text x="175" y="133" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">AUTEUR</text>
+    <text x="76" y="166" font-size="12.5" fill="#1B2A4A" font-weight="bold">🔑 id</text>
+    <text x="230" y="166" font-size="11" fill="#6B7280" text-anchor="end">SERIAL PK</text>
+    <text x="76" y="192" font-size="12.5" fill="#1B2A4A">nom</text>
+    <text x="230" y="192" font-size="11" fill="#6B7280" text-anchor="end">VARCHAR</text>
+    <text x="76" y="218" font-size="12.5" fill="#1B2A4A">nationalite</text>
+    <text x="230" y="218" font-size="11" fill="#6B7280" text-anchor="end">VARCHAR</text>
+  </g>
+
+  <!-- LIVRE table -->
+  <g>
+    <rect x="440" y="110" width="240" height="205" rx="6" fill="#F4F6FA" stroke="#1B2A4A" stroke-width="1.5"/>
+    <rect x="440" y="110" width="240" height="34" rx="6" fill="#1B2A4A"/>
+    <rect x="440" y="128" width="240" height="16" fill="#1B2A4A"/>
+    <text x="560" y="133" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">LIVRE</text>
+    <text x="456" y="166" font-size="12.5" fill="#1B2A4A" font-weight="bold">🔑 id</text>
+    <text x="664" y="166" font-size="11" fill="#6B7280" text-anchor="end">SERIAL PK</text>
+    <text x="456" y="192" font-size="12.5" fill="#1B2A4A">titre</text>
+    <text x="664" y="192" font-size="11" fill="#6B7280" text-anchor="end">VARCHAR</text>
+    <text x="456" y="218" font-size="12.5" fill="#1B2A4A">annee_publication</text>
+    <text x="664" y="218" font-size="11" fill="#6B7280" text-anchor="end">INTEGER</text>
+    <text x="456" y="244" font-size="12.5" fill="#C9A227" font-weight="bold">🔗 auteur_id</text>
+    <text x="664" y="244" font-size="11" fill="#6B7280" text-anchor="end">FK → AUTEUR</text>
+    <text x="456" y="270" font-size="12.5" fill="#1B2A4A">disponible</text>
+    <text x="664" y="270" font-size="11" fill="#6B7280" text-anchor="end">BOOLEAN</text>
+    <text x="456" y="296" font-size="10.5" fill="#9AA1AE" font-style="italic">default: true</text>
+  </g>
+
+  <!-- ADHERENT table -->
+  <g>
+    <rect x="60" y="420" width="230" height="150" rx="6" fill="#F4F6FA" stroke="#1B2A4A" stroke-width="1.5"/>
+    <rect x="60" y="420" width="230" height="34" rx="6" fill="#1B2A4A"/>
+    <rect x="60" y="438" width="230" height="16" fill="#1B2A4A"/>
+    <text x="175" y="443" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">ADHERENT</text>
+    <text x="76" y="476" font-size="12.5" fill="#1B2A4A" font-weight="bold">🔑 id</text>
+    <text x="230" y="476" font-size="11" fill="#6B7280" text-anchor="end">SERIAL PK</text>
+    <text x="76" y="502" font-size="12.5" fill="#1B2A4A">nom</text>
+    <text x="230" y="502" font-size="11" fill="#6B7280" text-anchor="end">VARCHAR</text>
+    <text x="76" y="528" font-size="12.5" fill="#1B2A4A">contact</text>
+    <text x="230" y="528" font-size="11" fill="#6B7280" text-anchor="end">VARCHAR</text>
+  </g>
+
+  <!-- EMPRUNT table -->
+  <g>
+    <rect x="440" y="400" width="260" height="260" rx="6" fill="#F4F6FA" stroke="#1B2A4A" stroke-width="1.5"/>
+    <rect x="440" y="400" width="260" height="34" rx="6" fill="#1B2A4A"/>
+    <rect x="440" y="418" width="260" height="16" fill="#1B2A4A"/>
+    <text x="570" y="423" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">EMPRUNT</text>
+    <text x="456" y="456" font-size="12.5" fill="#1B2A4A" font-weight="bold">🔑 id</text>
+    <text x="684" y="456" font-size="11" fill="#6B7280" text-anchor="end">SERIAL PK</text>
+    <text x="456" y="482" font-size="12.5" fill="#C9A227" font-weight="bold">🔗 adherent_id</text>
+    <text x="684" y="482" font-size="11" fill="#6B7280" text-anchor="end">FK → ADHERENT</text>
+    <text x="456" y="508" font-size="12.5" fill="#C9A227" font-weight="bold">🔗 livre_id</text>
+    <text x="684" y="508" font-size="11" fill="#6B7280" text-anchor="end">FK → LIVRE</text>
+    <text x="456" y="534" font-size="12.5" fill="#1B2A4A">date_emprunt</text>
+    <text x="684" y="534" font-size="11" fill="#6B7280" text-anchor="end">DATE</text>
+    <text x="456" y="560" font-size="12.5" fill="#1B2A4A">date_retour_prevue</text>
+    <text x="684" y="560" font-size="11" fill="#6B7280" text-anchor="end">DATE</text>
+    <text x="456" y="586" font-size="12.5" fill="#1B2A4A">date_retour_effective</text>
+    <text x="684" y="586" font-size="11" fill="#6B7280" text-anchor="end">DATE (null?)</text>
+    <text x="456" y="612" font-size="10.5" fill="#9AA1AE" font-style="italic">NULL = emprunt en cours</text>
+    <text x="456" y="632" font-size="10.5" fill="#9AA1AE" font-style="italic">prevue &lt; aujourd'hui = retard</text>
+  </g>
+
+  <!-- Relation AUTEUR -> LIVRE -->
+  <path d="M 290 175 L 440 175" stroke="#1B2A4A" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="365" y="167" text-anchor="middle" font-size="12" fill="#1B2A4A" font-weight="bold">1 —— N</text>
+  <text x="365" y="196" text-anchor="middle" font-size="10.5" fill="#6B7280">un auteur a plusieurs livres</text>
+
+  <!-- Relation ADHERENT -> EMPRUNT -->
+  <path d="M 290 480 L 440 480" stroke="#1B2A4A" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="365" y="472" text-anchor="middle" font-size="12" fill="#1B2A4A" font-weight="bold">1 —— N</text>
+  <text x="365" y="500" text-anchor="middle" font-size="10.5" fill="#6B7280">un adhérent a plusieurs emprunts</text>
+
+  <!-- Relation LIVRE -> EMPRUNT (vertical) -->
+  <path d="M 560 315 L 560 400" stroke="#1B2A4A" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="640" y="360" text-anchor="middle" font-size="12" fill="#1B2A4A" font-weight="bold">1 —— N</text>
+  <text x="640" y="378" text-anchor="middle" font-size="10.5" fill="#6B7280">un livre a plusieurs emprunts</text>
+  <text x="640" y="393" text-anchor="middle" font-size="10.5" fill="#6B7280">(dans le temps)</text>
+
+  <!-- Legend -->
+  <g>
+    <rect x="850" y="420" width="210" height="130" rx="6" fill="#FFFFFF" stroke="#D8DBE3" stroke-width="1"/>
+    <text x="865" y="444" font-size="12" font-weight="bold" fill="#1B2A4A">Légende</text>
+    <text x="865" y="468" font-size="11.5" fill="#1B2A4A">🔑 Clé primaire (PK)</text>
+    <text x="865" y="490" font-size="11.5" fill="#C9A227">🔗 Clé étrangère (FK)</text>
+    <text x="865" y="514" font-size="11" fill="#6B7280">1 —— N : relation</text>
+    <text x="865" y="530" font-size="11" fill="#6B7280">un-à-plusieurs</text>
+  </g>
+</svg>

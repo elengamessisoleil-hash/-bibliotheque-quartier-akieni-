@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bibliothèque de quartier</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar__brand">
+      <span class="topbar__mark">Bibliothèque</span>
+      <span class="topbar__sub">du quartier</span>
+    </div>
+    <nav class="topbar__nav" aria-label="Navigation principale">
+      <button class="navlink is-active" data-section="livres">Livres</button>
+      <button class="navlink" data-section="auteurs">Auteurs</button>
+      <button class="navlink" data-section="adherents">Adhérents</button>
+      <button class="navlink" data-section="emprunts">Emprunts</button>
+      <button class="navlink" data-section="statistiques">Tableau de bord</button>
+    </nav>
+  </header>
+
+  <main class="content">
+
+    <!-- ============ SECTION LIVRES ============ -->
+    <section id="section-livres" class="section is-active">
+      <div class="section__header">
+        <h1>Livres</h1>
+        <p class="section__desc">Le catalogue complet, avec leur statut de disponibilité.</p>
+      </div>
+
+      <div class="section__actions">
+        <button class="btn btn--primary" data-toggle-form="livre">+ Ajouter un livre</button>
+      </div>
+
+      <div id="form-panel-livre" class="form-panel">
+        <h2>Nouveau livre</h2>
+        <div id="form-livre-message" class="form-message" role="alert"></div>
+        <form id="form-livre" novalidate>
+          <div class="form-grid">
+            <div class="form-field form-field--full">
+              <label for="livre-titre">Titre</label>
+              <input type="text" id="livre-titre" name="titre" required>
+            </div>
+            <div class="form-field">
+              <label for="livre-auteur">Auteur</label>
+              <select id="livre-auteur" name="auteur_id" required>
+                <option value="">— Choisir un auteur —</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="livre-annee">Année de publication</label>
+              <input type="number" id="livre-annee" name="annee_publication" min="1000" max="2100">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary">Enregistrer le livre</button>
+            <button type="button" class="btn btn--ghost" data-toggle-form="livre">Annuler</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="search-bar">
+        <input type="search" id="livres-recherche" placeholder="Rechercher par titre ou nom d'auteur…">
+      </div>
+
+      <div id="livres-liste" class="ledger" aria-live="polite">
+        <p class="ledger__loading">Chargement des livres…</p>
+      </div>
+      <div id="livres-pagination" class="pagination"></div>
+    </section>
+
+    <!-- ============ SECTION AUTEURS ============ -->
+    <section id="section-auteurs" class="section">
+      <div class="section__header">
+        <h1>Auteurs</h1>
+        <p class="section__desc">Les auteurs enregistrés dans le catalogue.</p>
+      </div>
+
+      <div class="section__actions">
+        <button class="btn btn--primary" data-toggle-form="auteur">+ Ajouter un auteur</button>
+      </div>
+
+      <div id="form-panel-auteur" class="form-panel">
+        <h2>Nouvel auteur</h2>
+        <div id="form-auteur-message" class="form-message" role="alert"></div>
+        <form id="form-auteur" novalidate>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="auteur-nom">Nom</label>
+              <input type="text" id="auteur-nom" name="nom" required>
+            </div>
+            <div class="form-field">
+              <label for="auteur-nationalite">Nationalité</label>
+              <input type="text" id="auteur-nationalite" name="nationalite">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary">Enregistrer l'auteur</button>
+            <button type="button" class="btn btn--ghost" data-toggle-form="auteur">Annuler</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="auteurs-liste" class="ledger" aria-live="polite">
+        <p class="ledger__loading">Chargement des auteurs…</p>
+      </div>
+    </section>
+
+    <!-- ============ SECTION ADHERENTS ============ -->
+    <section id="section-adherents" class="section">
+      <div class="section__header">
+        <h1>Adhérents</h1>
+        <p class="section__desc">Les membres inscrits à la bibliothèque.</p>
+      </div>
+
+      <div class="section__actions">
+        <button class="btn btn--primary" data-toggle-form="adherent">+ Ajouter un adhérent</button>
+      </div>
+
+      <div id="form-panel-adherent" class="form-panel">
+        <h2>Nouvel adhérent</h2>
+        <div id="form-adherent-message" class="form-message" role="alert"></div>
+        <form id="form-adherent" novalidate>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="adherent-nom">Nom</label>
+              <input type="text" id="adherent-nom" name="nom" required>
+            </div>
+            <div class="form-field">
+              <label for="adherent-contact">Contact</label>
+              <input type="text" id="adherent-contact" name="contact" placeholder="email ou téléphone" required>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary">Enregistrer l'adhérent</button>
+            <button type="button" class="btn btn--ghost" data-toggle-form="adherent">Annuler</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="adherents-liste" class="ledger" aria-live="polite">
+        <p class="ledger__loading">Chargement des adhérents…</p>
+      </div>
+    </section>
+
+    <!-- ============ SECTION EMPRUNTS ============ -->
+    <section id="section-emprunts" class="section">
+      <div class="section__header">
+        <h1>Emprunts</h1>
+        <p class="section__desc">Enregistrer un nouvel emprunt et suivre les emprunts en cours.</p>
+      </div>
+
+      <div class="form-panel is-open">
+        <h2>Nouvel emprunt</h2>
+        <div id="form-emprunt-message" class="form-message" role="alert"></div>
+        <form id="form-emprunt" novalidate>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="emprunt-adherent">Adhérent</label>
+              <select id="emprunt-adherent" name="adherent_id" required>
+                <option value="">— Choisir un adhérent —</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="emprunt-livre">Livre</label>
+              <select id="emprunt-livre" name="livre_id" required>
+                <option value="">— Choisir un livre —</option>
+              </select>
+            </div>
+            <div class="form-field form-field--full">
+              <label for="emprunt-date">Date de retour prévue</label>
+              <input type="date" id="emprunt-date" name="date_retour_prevue" required>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary">Enregistrer l'emprunt</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="section__header" style="margin-top: 2rem;">
+        <h1 style="font-size: 1.4rem;">Emprunts en cours</h1>
+        <p class="section__desc">Les emprunts en retard sont mis en évidence.</p>
+      </div>
+      <div id="emprunts-liste" class="ledger" aria-live="polite">
+        <p class="ledger__loading">Chargement des emprunts…</p>
+      </div>
+    </section>
+
+    <!-- ============ SECTION STATISTIQUES ============ -->
+    <section id="section-statistiques" class="section">
+      <div class="section__header">
+        <h1>Tableau de bord</h1>
+        <p class="section__desc">Vue d'ensemble de l'activité de la bibliothèque.</p>
+      </div>
+      <div id="statistiques-contenu" aria-live="polite">
+        <p class="ledger__loading">Chargement des statistiques…</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/livres.js"></script>
+  <script src="js/auteurs.js"></script>
+  <script src="js/adherents.js"></script>
+  <script src="js/emprunts.js"></script>
+  <script src="js/statistiques.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

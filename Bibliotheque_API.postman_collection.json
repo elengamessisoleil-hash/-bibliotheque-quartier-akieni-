@@ -1,0 +1,212 @@
+{
+  "info": {
+    "name": "Bibliothèque de quartier — API",
+    "description": "Collection de test pour le jalon intermédiaire S14 — Akieni Academy",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:3000/api" }
+  ],
+  "item": [
+    {
+      "name": "1. Auteurs",
+      "item": [
+        {
+          "name": "Lister les auteurs",
+          "request": { "method": "GET", "url": "{{base_url}}/auteurs" }
+        },
+        {
+          "name": "Créer un auteur",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Fatou Diome\",\n  \"nationalite\": \"Sénégalaise\"\n}"
+            },
+            "url": "{{base_url}}/auteurs"
+          }
+        },
+        {
+          "name": "Modifier un auteur (id=1)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Alain Mabanckou\",\n  \"nationalite\": \"Congolaise (mis à jour)\"\n}"
+            },
+            "url": "{{base_url}}/auteurs/1"
+          }
+        },
+        {
+          "name": "Supprimer un auteur (id=4, celui créé au-dessus)",
+          "request": { "method": "DELETE", "url": "{{base_url}}/auteurs/4" }
+        }
+      ]
+    },
+    {
+      "name": "2. Adhérents",
+      "item": [
+        {
+          "name": "Lister les adhérents",
+          "request": { "method": "GET", "url": "{{base_url}}/adherents" }
+        },
+        {
+          "name": "Créer un adhérent",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Messi Elenga\",\n  \"contact\": \"messi@example.com\"\n}"
+            },
+            "url": "{{base_url}}/adherents"
+          }
+        },
+        {
+          "name": "Modifier un adhérent (id=1)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Chris Nzila\",\n  \"contact\": \"chris.nzila.new@example.com\"\n}"
+            },
+            "url": "{{base_url}}/adherents/1"
+          }
+        },
+        {
+          "name": "Historique des emprunts d'un adhérent (id=1)",
+          "request": { "method": "GET", "url": "{{base_url}}/adherents/1/emprunts" }
+        },
+        {
+          "name": "Supprimer un adhérent (id=3, celui créé au-dessus)",
+          "request": { "method": "DELETE", "url": "{{base_url}}/adherents/3" }
+        }
+      ]
+    },
+    {
+      "name": "3. Livres",
+      "item": [
+        {
+          "name": "Lister les livres",
+          "request": { "method": "GET", "url": "{{base_url}}/livres" }
+        },
+        {
+          "name": "Rechercher un livre par titre",
+          "request": { "method": "GET", "url": "{{base_url}}/livres?recherche=Verre" }
+        },
+        {
+          "name": "Rechercher un livre par auteur",
+          "request": { "method": "GET", "url": "{{base_url}}/livres?recherche=Mabanckou" }
+        },
+        {
+          "name": "Livres paginés (page 1, limite 2)",
+          "request": { "method": "GET", "url": "{{base_url}}/livres?page=1&limite=2" }
+        },
+        {
+          "name": "Créer un livre",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Le Ventre de l'Atlantique\",\n  \"annee_publication\": 2003,\n  \"auteur_id\": 2\n}"
+            },
+            "url": "{{base_url}}/livres"
+          }
+        },
+        {
+          "name": "Modifier un livre (id=1)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Verre Cassé\",\n  \"annee_publication\": 2005,\n  \"auteur_id\": 1\n}"
+            },
+            "url": "{{base_url}}/livres/1"
+          }
+        },
+        {
+          "name": "Supprimer un livre (id=4, celui créé au-dessus)",
+          "request": { "method": "DELETE", "url": "{{base_url}}/livres/4" }
+        }
+      ]
+    },
+    {
+      "name": "4. Emprunts — logique métier",
+      "item": [
+        {
+          "name": "A. Créer un emprunt (livre id=2, disponible)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"adherent_id\": 1,\n  \"livre_id\": 2,\n  \"date_retour_prevue\": \"2026-09-20\"\n}"
+            },
+            "url": "{{base_url}}/emprunts"
+          },
+          "description": "Doit renvoyer 201 avec l'emprunt créé. Vérifie ensuite que le livre 2 est passé à disponible=false via GET /livres."
+        },
+        {
+          "name": "B. Re-créer un emprunt sur le MÊME livre (doit échouer)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"adherent_id\": 2,\n  \"livre_id\": 2,\n  \"date_retour_prevue\": \"2026-09-25\"\n}"
+            },
+            "url": "{{base_url}}/emprunts"
+          },
+          "description": "Doit renvoyer 409 Conflict avec le message 'Ce livre est déjà emprunté et n'est pas disponible'. C'EST LE TEST CLÉ à montrer en démo."
+        },
+        {
+          "name": "C. Créer un emprunt EN RETARD (date passée, pour tester findEnRetard)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"adherent_id\": 2,\n  \"livre_id\": 3,\n  \"date_retour_prevue\": \"2026-09-01\"\n}"
+            },
+            "url": "{{base_url}}/emprunts"
+          },
+          "description": "date_retour_prevue volontairement dans le passé pour simuler un retard à afficher ensuite."
+        },
+        {
+          "name": "D. Lister les emprunts en cours",
+          "request": { "method": "GET", "url": "{{base_url}}/emprunts/en-cours" }
+        },
+        {
+          "name": "E. Lister les emprunts en retard",
+          "request": { "method": "GET", "url": "{{base_url}}/emprunts/en-retard" },
+          "description": "Doit contenir l'emprunt créé à l'étape C."
+        },
+        {
+          "name": "F. Marquer le retour de l'emprunt A (remplacer :id par l'id reçu à l'étape A)",
+          "request": { "method": "PATCH", "url": "{{base_url}}/emprunts/1/retour" },
+          "description": "Doit renvoyer l'emprunt avec date_retour_effective renseignée. Vérifie ensuite que le livre redevient disponible=true."
+        },
+        {
+          "name": "G. Re-tenter un retour sur le même emprunt (doit échouer)",
+          "request": { "method": "PATCH", "url": "{{base_url}}/emprunts/1/retour" },
+          "description": "Doit renvoyer 409 'Ce livre a déjà été rendu'."
+        }
+      ]
+    },
+    {
+      "name": "5. Statistiques",
+      "item": [
+        {
+          "name": "Tableau de bord",
+          "request": { "method": "GET", "url": "{{base_url}}/statistiques" },
+          "description": "Doit renvoyer total_livres, total_adherents, emprunts_en_cours, emprunts_en_retard, livre_plus_emprunte, adherent_plus_actif."
+        }
+      ]
+    }
+  ]
+}
