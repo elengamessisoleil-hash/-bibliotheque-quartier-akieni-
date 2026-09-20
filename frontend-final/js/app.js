@@ -33,4 +33,11 @@ document.addEventListener("DOMContentLoaded", () => {
   rafraichirSelecteurAuteurs();
   rafraichirSelecteurAdherents();
   rafraichirSelecteurLivresDisponibles();
+
+  // Permet à la page d'accueil de renvoyer directement vers une section
+  // précise (ex. index.html#emprunts) plutôt que toujours sur Livres.
+  const sectionCiblee = window.location.hash.replace("#", "");
+  if (sectionCiblee && document.getElementById(`section-${sectionCiblee}`)) {
+    afficherSection(sectionCiblee);
+  }
 });
