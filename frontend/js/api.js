@@ -4,7 +4,7 @@
    si l'URL de base change un jour, un seul fichier à modifier.
    ============================================================ */
 
-const API_BASE = "http://localhost:3000/api";
+const API_BASE = "https://bibliotheque-api-j3cy.onrender.com/api";
 
 /**
  * Enveloppe fetch() : parse toujours le JSON, et transforme une
@@ -21,7 +21,8 @@ async function apiFetch(path, options = {}) {
   const data = await response.json().catch(() => null);
 
   if (!response.ok) {
-    const message = data && data.erreur ? data.erreur : `Erreur ${response.status}`;
+    const message =
+      data && data.erreur ? data.erreur : `Erreur ${response.status}`;
     throw new Error(message);
   }
 
@@ -43,7 +44,10 @@ function creerLivre(livre) {
 }
 
 function modifierLivre(id, livre) {
-  return apiFetch(`/livres/${id}`, { method: "PUT", body: JSON.stringify(livre) });
+  return apiFetch(`/livres/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(livre),
+  });
 }
 
 function supprimerLivre(id) {
@@ -71,13 +75,19 @@ function getHistoriqueAdherent(id) {
 }
 
 function creerAdherent(adherent) {
-  return apiFetch("/adherents", { method: "POST", body: JSON.stringify(adherent) });
+  return apiFetch("/adherents", {
+    method: "POST",
+    body: JSON.stringify(adherent),
+  });
 }
 
 // ---------------- Emprunts ----------------
 
 function creerEmprunt(emprunt) {
-  return apiFetch("/emprunts", { method: "POST", body: JSON.stringify(emprunt) });
+  return apiFetch("/emprunts", {
+    method: "POST",
+    body: JSON.stringify(emprunt),
+  });
 }
 
 function marquerRetour(id) {
